@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>骚话王</title>
+    <script>
+        $(document).ready(function() {
+
+            var i;
+            $(".getInfo").on("click", function() {
+                i = Math.floor(Math.random() * 9);
+                $.getJSON("http://gank.io/api/xiandu/categories", function(json) {
+                    var book1 = " 今日推荐:<br>《" + json.results[i].name + "》";
+
+                    //QQ空间API
+                    //https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=你的网址&sharesource=qzone&title=你的分享标题&pics=你的分享图片&summary=你的分享描述信息
+                    var share = "";
+                    share += '<a class="Qzen" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=';
+                    share += 'https://github.com/Ccneedmoney';
+                    share += '&sharesource=qzone&title=今日杂志推荐&pics=';
+                    share += '&pics=http://r.photo.store.qq.com/psb?/V14JQhu249M9JA/zhfuFUMXZl9J94EovUTSxvOFg8tV0Ow0Q17VF6hRe1w!/r/dAgBAAAAAAAA&summary=《';
+                    share += json.results[i].name;
+                    share += '》"><img src="./img/QQ.png" width="100% " height="100% " alt="发送到QQ空间 "></a>';
+                    //分享给QQ好友接口：
+                    //http://connect.qq.com/widget/shareqq/index.html?url=你的分享网址&sharesource=qzone&title=你的分享标题&pics=你的分享图片地址&summary=你的分享描述&desc=你的分享简述
+                    // console.log(json.results[i].name);
+                    var shareQQ = "";
+                    shareQQ += '<a class="QQ" href="http://connect.qq.com/widget/shareqq/index.html?url=';
+                    shareQQ += 'https://github.com/Ccneedmoney';
+                    shareQQ += '&sharesource=qzone&title=今日杂志推荐&pics=你的分享图片地址&summary=《';
+                    shareQQ += json.results[i].name;
+                    shareQQ += '》&desc=APItest"> <img src="./img/qq好友.png" width="100%" height="100%" alt="发送到朋友圈"></a>';
+                    $(".textBox").html(book1);
+                    $(".Qzen").html(share);
+                    $(".QQ").html(shareQQ);
+                });
+            });
+
+        });
+    </script>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
+        
+        .main {
+            width: 600px;
+            height: 375px;
+            background-color: #e6e6e6;
+            border-radius: 8px;
+            margin: 120px auto;
+        }
+        
+        .show {
+            width: 100%;
+            height: 275px;
+            background-color: #fff;
+            border-radius: 8px;
+        }
+        
+        .btn {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 0px 0px 10px 10px;
+        }
+        
+        .getInfo {
+            width: 120px;
+            height: 80px;
+            display: inline-block;
+            margin: 10px 30px 10px 10px;
+            float: right;
+            border-radius: 8px;
+            background-color: #fff;
+        }
+        
+        .getInfo a:link,
+        .getInfo a:visited {
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            text-transform: uppercase;
+            color: #000000;
+            margin: auto;
+            padding-top: 29px;
+        }
+        
+        .getInfo a:hover,
+        .getInfo a:active {
+            background-color: gray;
+            color: #fff;
+        }
+        
+        #showButton {
+            height: 51px;
+        }
+        
+        .icon {
+            width: 100px;
+            height: 55px;
+            display: inline-block;
+        }
+        
+        .textBox {
+            display: inline-block;
+            width: 400px;
+            height: 135px;
+            margin: auto;
+            margin-top: 70px;
+            font-size: 20px;
+            font-family: 楷体;
+            text-align: center;
+            padding: 40px 0px;
+        }
+        
+        .left {
+            float: left;
+            border-radius: 8px 0px 0px 0px;
+            margin-top: 70px;
+        }
+        
+        .right {
+            float: right;
+            border-radius: 0px 8px 0px 0px;
+            margin: 150px 0px 70px 0px;
+        }
+    </style>
+</head>
+
+<body style="background-color: antiquewhite">
+    <div class="main">
+
+
+        <div class="show">
+            <div class="icon left">
+                <img src="./img/引号.png" height="100%" alt="" style=" padding-left: 45px;">
+            </div>
+            <div class="textBox">
+                今日份推荐
+
+            </div>
+
+            <div class="icon right">
+                <img src="./img/引号 (1).png" height="100%" alt="" style=" padding-right: 45px;">
+            </div>
+        </div>
+
+        <div class="btn">
+            <a class="Qzen" href="#"> <img src="./img/QQ.png" width="100%" height="100%" alt="发送到QQ空间"></a>
+
+        </div>
+        <div class="btn" style="margin: 10px">
+            <a class="QQ" href="#"> <img src="./img/qq好友.png" width="100%" height="100%" alt="发送到朋友圈"></a>
+        </div>
+        <div class="getInfo">
+            <a href="#" class="getInfo " id="showButton">
+         
+            点击获取推荐
+        </a>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>
